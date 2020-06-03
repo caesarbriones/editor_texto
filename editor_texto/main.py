@@ -1,12 +1,29 @@
 from tkinter import *
+from tkinter import filedialog as FileDialog
+
+ruta = ""
 
 def salir():
     root.quit()
 
 def nuevo():
+    global ruta 
+    ruta = ""
+    text.delete(1.0,"end"
+                )
     mensaje.set('Nuevo')
 
 def abrir():
+    global ruta
+    ruta = FileDialog.askopenfilename(title="Selecciona un archivo de texto",
+                                      initialdir="/")
+    archivo = open(ruta,'r')
+    contenido = archivo.read()
+    text.delete(1.0,"end")
+    text.insert('insert',contenido)
+    archivo.close()
+    root.title(ruta+" - Mi editor")
+    
     mensaje.set('Abrir')
 
 def guardar():
