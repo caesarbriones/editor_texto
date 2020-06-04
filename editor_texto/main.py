@@ -28,10 +28,29 @@ def abrir():
 
 def guardar():
     mensaje.set('Guardar')
+    
+    if ruta !="":
+        contenido = text.get(1.0,"end-1c")
+        archivo = open(ruta,"w+")
+        archivo.write(contenido)
+        archivo.close()
+        mensaje.set('Archivo guardado con exito')
+    else:
+        guardar_como()
+    
 
 def guardar_como():
+    global ruta
     mensaje.set('Guardar como...')
-
+    archivo = FileDialog.asksaveasfile(title="Guardar fichero",mode="w",defaultextension =".txt")
+    
+    if archivo is not None:
+        ruta = archivo.name
+        contenido = text.get(1.0,"end-1c")
+        mensaje.set('Archivo guardado con exito')
+    else:
+        mensaje.set("Guardado cancelado")
+        
 root = Tk()
 root.title("Editor de texto")
 root.iconbitmap('resources/favicon.ico')
