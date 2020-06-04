@@ -15,16 +15,18 @@ def nuevo():
 
 def abrir():
     global ruta
-    ruta = FileDialog.askopenfilename(title="Selecciona un archivo de texto",
-                                      initialdir="/")
-    archivo = open(ruta,'r')
-    contenido = archivo.read()
-    text.delete(1.0,"end")
-    text.insert('insert',contenido)
-    archivo.close()
-    root.title(ruta+" - Mi editor")
-    
     mensaje.set('Abrir')
+    ruta = FileDialog.askopenfilename(title="Selecciona un archivo de texto",
+                                      initialdir="/",filetypes = (("Archivos de texto","*.txt"),))
+    if ruta !="":
+        archivo = open(ruta,'r')
+        contenido = archivo.read()
+        text.delete(1.0,"end")
+        text.insert('insert',contenido)
+        archivo.close()
+        root.title(ruta+" - Mi editor")
+    else:
+        mensaje.set('Selecciona un archivo')
 
 def guardar():
     mensaje.set('Guardar')
